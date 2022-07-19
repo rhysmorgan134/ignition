@@ -1,0 +1,239 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "name": "ESPhome",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "SensorData",
+          "tagType": "Folder"
+        },
+        {
+          "valueSource": "db",
+          "dataType": "StringArray",
+          "datasource": "main",
+          "query": "SELECT sensorName FROM Sensors WHERE added\u003d1",
+          "name": "activeSensors",
+          "executionMode": "FixedRate",
+          "executionRate": 3000,
+          "tagType": "AtomicTag"
+        },
+        {
+          "name": "config",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "valueSource": "memory",
+              "dataType": "String",
+              "name": "tagProvider",
+              "value": "ESPHome",
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "memory",
+              "dataType": "Boolean",
+              "name": "pull",
+              "value": false,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "memory",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\tif currentValue.value \u003d\u003d True:\n\t\tquery \u003d \"\"\"CREATE TABLE `Sensors` (\n\t\t  `idSensors` varchar(45) NOT NULL,\n\t\t  `devId` varchar(45) DEFAULT NULL,\n\t\t  `model` varchar(45) DEFAULT NULL,\n\t\t  `manufacturer` varchar(45) DEFAULT NULL,\n\t\t  `name` varchar(45) DEFAULT NULL,\n\t\t  `sw` varchar(255) DEFAULT NULL,\n\t\t  `cla` varchar(45) DEFAULT NULL,\n\t\t  `sensorName` varchar(45) DEFAULT NULL,\n\t\t  `type` varchar(45) DEFAULT NULL,\n\t\t  `topic` varchar(255) DEFAULT NULL,\n\t\t  `UOM` varchar(45) DEFAULT NULL,\n\t\t  `added` tinyint DEFAULT \u00270\u0027,\n\t\t  `configPath` varchar(255) DEFAULT NULL,\n\t\t  `commandTopic` varchar(255) DEFAULT NULL,\n\t\t  `blackListed` tinyint DEFAULT \u00270\u0027,\n\t\t  PRIMARY KEY (`idSensors`),\n\t\t  UNIQUE KEY `idSensors_UNIQUE` (`idSensors`)\n\t\t) ENGINE\u003dInnoDB DEFAULT CHARSET\u003dutf8mb4 COLLATE\u003dutf8mb4_0900_ai_ci;\"\"\"\n\t\tsystem.db.runUpdateQuery(query)"
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "FirstRun",
+              "value": false,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "memory",
+              "dataType": "String",
+              "name": "ServerName",
+              "value": "home",
+              "tagType": "AtomicTag"
+            }
+          ]
+        },
+        {
+          "valueSource": "db",
+          "eventScripts": [
+            {
+              "eventid": "valueChanged",
+              "script": "\tsystem.tag.write(\"[.]config/pull\", 0)"
+            }
+          ],
+          "dataType": "DataSet",
+          "datasource": "main",
+          "query": "SELECT * FROM Sensors WHERE blackListed\u003d0",
+          "name": "Sensors",
+          "executionMode": "TagGroupRate",
+          "tagGroup": "query",
+          "tagType": "AtomicTag"
+        }
+      ]
+    },
+    {
+      "name": "_types_",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "switch",
+          "parameters": {
+            "path": {
+              "dataType": "String"
+            },
+            "configPath": {
+              "dataType": "String"
+            }
+          },
+          "tagType": "UdtType",
+          "tags": [
+            {
+              "valueSource": "memory",
+              "dataType": "String",
+              "name": "UOM",
+              "tagType": "AtomicTag"
+            },
+            {
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "\"[MQTT Engine]\" + {path}"
+              },
+              "valueSource": "expr",
+              "expression": "Tag(\"[MQTT Engine]\" + {path})",
+              "dataType": "String",
+              "historyProvider": "main",
+              "name": "value",
+              "historyEnabled": false,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "expr",
+              "expression": "if({[.]value} \u003d \"ON\", True, False)",
+              "historyProvider": "main",
+              "dataType": "Boolean",
+              "historicalDeadbandStyle": "Discrete",
+              "name": "BinaryValue",
+              "historyEnabled": true,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "expr",
+              "expression": "Tag({configPath} + \"/cmd_t\")",
+              "dataType": "String",
+              "name": "commandTopic",
+              "value": "",
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "expr",
+              "expression": "dateDiff(timestampOf({[.]value}), now(), \"second\")",
+              "dataType": "Int4",
+              "name": "lastUpdate",
+              "formatString": "#,##0.##",
+              "tagType": "AtomicTag"
+            }
+          ]
+        },
+        {
+          "name": "binarySensor",
+          "parameters": {
+            "path": {
+              "dataType": "String"
+            },
+            "configPath": {
+              "dataType": "String"
+            }
+          },
+          "tagType": "UdtType",
+          "tags": [
+            {
+              "valueSource": "expr",
+              "expression": "if({[.]value} \u003d\u003d \"ON\", True, False)",
+              "historyProvider": "main",
+              "historicalDeadbandStyle": "Discrete",
+              "name": "BinaryValue",
+              "historyEnabled": true,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "memory",
+              "dataType": "String",
+              "name": "UOM",
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "expr",
+              "expression": "dateDiff(timestampOf({[.]value}), now(), \"second\")",
+              "dataType": "Int4",
+              "name": "lastUpdate",
+              "formatString": "#,##0.##",
+              "tagType": "AtomicTag"
+            },
+            {
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "\"[MQTT Engine]\" + {path}"
+              },
+              "valueSource": "expr",
+              "expression": "Tag(\"[MQTT Engine]\" + {path})",
+              "dataType": "String",
+              "historyProvider": "main",
+              "name": "value",
+              "historyEnabled": false,
+              "tagType": "AtomicTag"
+            }
+          ]
+        },
+        {
+          "name": "sensor",
+          "parameters": {
+            "path": {
+              "dataType": "String"
+            },
+            "configPath": {
+              "dataType": "String"
+            }
+          },
+          "tagType": "UdtType",
+          "tags": [
+            {
+              "valueSource": "expr",
+              "expression": "dateDiff(timestampOf({[.]value}), now(), \"second\")",
+              "dataType": "Int4",
+              "name": "lastUpdate",
+              "formatString": "#,##0.##",
+              "tagType": "AtomicTag"
+            },
+            {
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "\"[MQTT Engine]\" + {path}"
+              },
+              "valueSource": "expr",
+              "expression": "Tag(\"[MQTT Engine]\" + {path})",
+              "dataType": "Float4",
+              "historyProvider": "main",
+              "name": "value",
+              "historyEnabled": true,
+              "tagType": "AtomicTag"
+            },
+            {
+              "valueSource": "expr",
+              "expression": "Tag({configPath} + \"/unit_of_meas\")",
+              "dataType": "String",
+              "name": "UOM",
+              "tagType": "AtomicTag"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

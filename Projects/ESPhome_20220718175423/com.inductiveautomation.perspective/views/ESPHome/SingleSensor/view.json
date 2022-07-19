@@ -1,0 +1,126 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "UOM": "%",
+      "added": 1,
+      "cla": "humidity",
+      "commandTopic": null,
+      "configPath": "[MQTT Engine]homeassistant/sensor/man-room/man-room_temperature/config",
+      "devId": "a4cf12df1653",
+      "idSensors": "ESPsensorgarage_humidity",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "garage",
+      "sensorName": "Garage Humidity",
+      "sw": "esphome v2021.11.4 Dec 28 2021, 12:51:12",
+      "topic": "garage/sensor/garage_humidity/state",
+      "type": "sensor"
+    }
+  },
+  "propConfig": {
+    "params.UOM": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.added": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.cla": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.idSensors": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.manufacturer": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.model": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sensorName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sw": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.topic": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.type": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 212,
+      "width": 365
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "props.params.data": {
+            "binding": {
+              "config": {
+                "path": "view.params.data"
+              },
+              "type": "property"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.data.added}, \"ESPHome/SingleSensorActive\", \"ESPHome/SingleSensorNew\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "if({view.params.data.added}, \"boxShadow\", \"boxShadowGlow\")"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {}
+    },
+    "type": "ia.container.flex"
+  }
+}

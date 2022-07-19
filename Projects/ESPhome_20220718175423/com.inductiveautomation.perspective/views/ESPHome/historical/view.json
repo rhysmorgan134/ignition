@@ -1,0 +1,212 @@
+{
+  "custom": {
+    "data": [
+      {
+        "axis": "",
+        "data": {
+          "aggregateMode": "default",
+          "source": "[default]ESPhome/SensorData/Living Room Dehumidifier/BinaryValue"
+        },
+        "display": {
+          "breakLine": true,
+          "interpolation": "curveLinear",
+          "radius": 3,
+          "styles": {
+            "highlighted": {
+              "fill": {
+                "color": "#63BEA2",
+                "opacity": 1
+              },
+              "stroke": {
+                "color": "#63BEA2",
+                "dashArray": 0,
+                "opacity": 1,
+                "width": 1
+              }
+            },
+            "muted": {
+              "fill": {
+                "color": "#63BEA2",
+                "opacity": 0.4
+              },
+              "stroke": {
+                "color": "#63BEA2",
+                "dashArray": 0,
+                "opacity": 0.4,
+                "width": 1
+              }
+            },
+            "normal": {
+              "fill": {
+                "color": "#63BEA2",
+                "opacity": 0.8
+              },
+              "stroke": {
+                "color": "#63BEA2",
+                "dashArray": 0,
+                "opacity": 0.8,
+                "width": 1
+              }
+            },
+            "selected": {
+              "fill": {
+                "color": "#63BEA2",
+                "opacity": 1
+              },
+              "stroke": {
+                "color": "#63BEA2",
+                "dashArray": 0,
+                "opacity": 1,
+                "width": 1
+              }
+            }
+          },
+          "type": "line"
+        },
+        "enabled": true,
+        "name": "value",
+        "plot": 0,
+        "selectable": true,
+        "visible": true
+      }
+    ]
+  },
+  "params": {
+    "historicalPath": "[default]ESPhome/SensorData/Living Room Dehumidifier/BinaryValue",
+    "path": "Garage Temperature"
+  },
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "config": {
+          "expression": "{view.params.historicalPath}"
+        },
+        "transforms": [
+          {
+            "code": "\tdata  \u003d {\n\t  \"name\": \"value\",\n\t  \"visible\": True,\n\t  \"enabled\": True,\n\t  \"selectable\": True,\n\t  \"axis\": \"\",\n\t  \"plot\": 0,\n\t  \"display\": {\n\t    \"type\": \"line\",\n\t    \"interpolation\": \"curveLinear\",\n\t    \"breakLine\": True,\n\t    \"radius\": 3,\n\t    \"styles\": {\n\t      \"normal\": {\n\t        \"stroke\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"width\": 1,\n\t          \"dashArray\": 0,\n\t          \"opacity\": 0.8\n\t        },\n\t        \"fill\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"opacity\": 0.8\n\t        }\n\t      },\n\t      \"highlighted\": {\n\t        \"stroke\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"width\": 1,\n\t          \"dashArray\": 0,\n\t          \"opacity\": 1\n\t        },\n\t        \"fill\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"opacity\": 1\n\t        }\n\t      },\n\t      \"selected\": {\n\t        \"stroke\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"width\": 1,\n\t          \"dashArray\": 0,\n\t          \"opacity\": 1\n\t        },\n\t        \"fill\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"opacity\": 1\n\t        }\n\t      },\n\t      \"muted\": {\n\t        \"stroke\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"width\": 1,\n\t          \"dashArray\": 0,\n\t          \"opacity\": 0.4\n\t        },\n\t        \"fill\": {\n\t          \"color\": \"#63BEA2\",\n\t          \"opacity\": 0.4\n\t        }\n\t      }\n\t    }\n\t  },\n\t  \"data\": {\n\t    \"source\": \"histprov:main:/drv:docker-test:default:/tag:esphome/sensordata/garage temperature/value\",\n\t    \"aggregateMode\": \"default\"\n\t  }\n\t}\n\t\n\tdata[\u0027data\u0027][\u0027source\u0027] \u003d value\n\treturn [data]",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.historicalPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.path": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 574,
+      "width": 1168
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "custom": {
+          "defaultTag": "value"
+        },
+        "meta": {
+          "name": "PowerChart"
+        },
+        "position": {
+          "basis": "600px"
+        },
+        "propConfig": {
+          "props.pens[0]": {
+            "binding": {
+              "config": {
+                "path": "view.custom.data[0]"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "config": {
+            "rangeEndDate": {
+              "$": [
+                "ts",
+                0,
+                1658166930181
+              ],
+              "$ts": 1658166746780
+            },
+            "rangeStartDate": {
+              "$": [
+                "ts",
+                0,
+                1658166930181
+              ],
+              "$ts": 1658138042481
+            },
+            "visibility": {
+              "showTagBrowser": true
+            }
+          },
+          "interaction": {
+            "chartZoomLevel": 1,
+            "rangeZoomLevel": 1
+          },
+          "pens": [
+            null
+          ]
+        },
+        "type": "ia.chart.powerchart"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.historicalPath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "custom": {
+      "key": [
+        {}
+      ]
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.key[0].path": {
+        "binding": {
+          "config": {
+            "path": "view.params.path"
+          },
+          "transforms": [
+            {
+              "expression": "\"[default]ESPhome/SensorData/\" + {value} + \"/value\"",
+              "type": "expression"
+            }
+          ],
+          "type": "property"
+        }
+      }
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "UOM": null,
+      "added": 1,
+      "cla": "humidity",
+      "devId": "a4cf12df1653",
+      "idSensors": "ESPsensorgarage_humidity",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "garage",
+      "sensorName": "Garage Humidity",
+      "sw": "esphome v2021.11.4 Dec 28 2021, 12:51:12",
+      "topic": "garage/sensor/garage_humidity/state",
+      "type": "binarySensor"
+    }
+  },
+  "propConfig": {
+    "params.UOM": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.added": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.cla": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.data": {
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.getChild(\"root\").getChild(\"Button\").custom.loading \u003d False"
+      },
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.idSensors": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.manufacturer": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.model": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sensorName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sw": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.topic": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.type": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 189,
+      "width": 383
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.sensorName"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "22px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Manufacturer"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "18px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.manufacturer"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Model"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.model"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "200px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "22px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Software"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "18px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.sw"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Type"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.type"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "200px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "22px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Measure"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "18px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.cla"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "10px"
+                  },
+                  "text": "Device ID"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.devId"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "alignVertical": "top",
+                  "style": {
+                    "fontSize": "10px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_2"
+        },
+        "position": {
+          "basis": "200px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "custom": {
+          "loading": false
+        },
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.custom.loading \u003d True\n\tdata \u003d system.cirruslink.engine.readConfig(\"Cust Namespace\")\n\tmaxId \u003d 0\n\tfor d in data:\n\t\tif d[\u0027Id\u0027] \u003e maxId:\n\t\t\tmaxId \u003d d[\u0027Id\u0027]\n\t\t\t\n\tif self.view.params.data.type \u003d\u003d \"switch\":\n\t\tjson \u003d False\n\telse:\n\t\tjson \u003d True\n\t\n\ttemp \u003d {}\n\t\n\ttemp[\u0027TagName\u0027] \u003d None\n\ttemp[\u0027WritableTags\u0027] \u003d False\n\ttemp[\u0027RootFolder\u0027] \u003d None\n\ttemp[\u0027Charset\u0027] \u003d \u0027UTF_8\u0027\n\ttemp[\u0027QoS1\u0027] \u003d False\n\ttemp[\u0027Id\u0027] \u003d maxId +1\n\ttemp[\u0027Subscription\u0027] \u003d self.view.params.data.topic + \"/#\"\n\ttemp[\u0027JsonPayload\u0027] \u003d json\n\ttemp[\u0027Name\u0027]\u003d self.view.params.data.sensorName\n\t\n\tdata.append(temp)\n\t\n\tsystem.cirruslink.engine.createConfig(\"Cust Namespace\", temp)\n\tparentPath \u003d \"[\" + self.session.custom.provider + \"]ESPHome/SensorData\"\n\t\n\ttagConfig \u003d {\n\t  \"name\": self.view.params.data.sensorName,\n\t  \"typeId\": self.view.params.data.type,\n\t  \"parameters\": {\n\t    \"path\": {\n\t      \"dataType\": \"String\",\n\t      \"value\": self.view.params.data.topic\n\t    },\n\t    \"configPath\": {\n\t      \"dataType\": \"String\",\n\t      \"value\": self.view.params.data.configPath\n\t    }\n\t  },\n\t  \"tagType\": \"UdtInstance\"\n\t}\n\tsystem.tag.configure(parentPath, tagConfig, \"o\")\n\tquery \u003d \"UPDATE Sensors SET added\u003d1 WHERE idSensors\u003d?\"\n\tvalues \u003d [self.view.params.data.idSensors]\n\tsystem.db.runPrepUpdate(query, values)\n\tsystem.tag.write(\"[\" + self.session.custom.provider + \"ESPhome/config/pull\", True)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "80px"
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "path": "this.custom.loading"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}, False, True)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "path": "material/add"
+            }
+          },
+          "text": ""
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Progress"
+        },
+        "position": {
+          "basis": "20px"
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "path": "../Button.custom.loading"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "mode": "indeterminate"
+        },
+        "type": "ia.display.progress"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "borderBottomLeftRadius": "5px",
+        "borderBottomRightRadius": "5px",
+        "borderTopLeftRadius": "5px",
+        "borderTopRightRadius": "5px",
+        "classes": "boxShadowGlow",
+        "padding": "5px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

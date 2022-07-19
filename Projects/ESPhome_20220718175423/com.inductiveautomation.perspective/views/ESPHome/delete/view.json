@@ -1,0 +1,109 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "UOM": "%",
+      "added": 1,
+      "cla": "humidity",
+      "commandTopic": null,
+      "configPath": "[MQTT Engine]homeassistant/sensor/man-room/man-room_temperature/config",
+      "devId": "a4cf12df1653",
+      "idSensors": "ESPsensorgarage_humidity",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "garage",
+      "sensorName": "Garage Humidity",
+      "sw": "esphome v2021.11.4 Dec 28 2021, 12:51:12",
+      "topic": "garage/sensor/garage_humidity/state",
+      "type": "sensor"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 247,
+      "width": 364
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "text": "Really delete this sensor?"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "props.params.data": {
+            "binding": {
+              "config": {
+                "path": "view.params.data"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "ESPHome/SingleSensorDelete",
+          "style": {
+            "margin": "10px"
+          }
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tconfigs \u003d system.cirruslink.engine.readConfig(\"Cust Namespace\")\n\n\tfor config in configs:\n\t\tif config[\u0027Name\u0027] \u003d\u003d self.view.params.data[\u0027sensorName\u0027]:\n\t\t\tsystem.cirruslink.engine.deleteConfig(\u0027Cust Namespace\u0027,config[\u0027Id\u0027])\n\tquery \u003d \"UPDATE Sensors SET blackListed\u003dTrue, added\u003dfalse WHERE idSensors\u003d?\"\n\tvalues \u003d [self.view.params.data.idSensors]\n\tsystem.db.runPrepUpdate(query, values)\n\t\n\ttagsToDelete \u003d [\"[\" + self.session.custom.provider + \"]ESPHome/SensorData/\" + self.view.params.data.sensorName, self.view.params.data.configPath.replace(\u0027/config\u0027, \u0027\u0027)]\n\tsystem.tag.deleteTags(tagsToDelete)\n\tsystem.tag.write(\"[\" + self.session.custom.provider + \"]ESPHome/config/pull\",True)\n\tsystem.perspective.closePopup(\"delete\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "70px"
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#EF7070",
+            "marginLeft": "30%",
+            "marginRight": "30%"
+          },
+          "text": "Delete"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

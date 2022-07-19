@@ -1,0 +1,112 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "UOM": "%",
+      "added": 1,
+      "cla": "humidity",
+      "commandTopic": null,
+      "configPath": "[MQTT Engine]homeassistant/sensor/man-room/man-room_temperature/config",
+      "devId": "a4cf12df1653",
+      "idSensors": "ESPsensorgarage_humidity",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "garage",
+      "sensorName": "Garage Humidity",
+      "sw": "esphome v2021.11.4 Dec 28 2021, 12:51:12",
+      "topic": "garage/sensor/garage_humidity/state",
+      "type": "sensor"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 63,
+      "width": 266
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Sparkline"
+        },
+        "position": {
+          "basis": "250px"
+        },
+        "propConfig": {
+          "custom.key": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.sensorName"
+              },
+              "transforms": [
+                {
+                  "code": "\tdata \u003d []\n\ttemp \u003d {}\n\ttemp[\u0027path\u0027] \u003d \u0027[\u0027 + self.session.custom.provider + \u0027]ESPhome/SensorData/\u0027 + self.view.params.data.sensorName + \u0027/value\u0027\n\tdata.append(temp)\n\treturn data",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.points": {
+            "binding": {
+              "config": {
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "mostRecent": "8",
+                  "mostRecentUnits": "HOUR"
+                },
+                "ignoreBadQuality": false,
+                "polling": {
+                  "enabled": true,
+                  "rate": "5"
+                },
+                "preventInterpolation": true,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "type": "RAW"
+                },
+                "tags": "{this.custom.key}",
+                "valueFormat": "DATASET"
+              },
+              "type": "tag-history"
+            }
+          },
+          "props.range.high": {
+            "binding": {
+              "config": {
+                "expression": "max({this.props.points}, 1, 0) + 2"
+              },
+              "type": "expr"
+            }
+          },
+          "props.range.low": {
+            "binding": {
+              "config": {
+                "expression": "min({this.props.points}, 1, 0) - 2"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "range": {}
+        },
+        "type": "ia.display.sparkline"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

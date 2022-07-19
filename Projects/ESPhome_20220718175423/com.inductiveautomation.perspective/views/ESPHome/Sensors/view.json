@@ -1,0 +1,54 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "320px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "1": "{[ESPHome]ESPhome/config/tagProvider}"
+                },
+                "tagPath": "[{1}]ESPhome/Sensors"
+              },
+              "transforms": [
+                {
+                  "code": "\n\tresult \u003d []\n\theaders \u003d system.dataset.getColumnHeaders(value)\n\tds \u003d system.dataset.sort(value, \"added\", False)\n\tds \u003d system.dataset.toPyDataSet(ds)\n\tfor row in ds:\n\t\tinstance \u003d {\n\t\t  \"instanceStyle\": {\n\t\t    \"classes\": \"\"\n\t\t  },\n\t\t  \"instancePosition\": {},\n\t\t  \"data\": {\n\t\t    \"UOM\": \"value\",\n\t\t    \"sw\": \"value\",\n\t\t    \"added\": \"value\",\n\t\t    \"sensorName\": \"value\",\n\t\t    \"idSensors\": \"value\",\n\t\t    \"name\": \"value\",\n\t\t    \"cla\": \"value\",\n\t\t    \"topic\": \"value\",\n\t\t    \"model\": \"value\",\n\t\t    \"type\": \"value\",\n\t\t    \"manufacturer\": \"value\"\n\t\t  }\n\t\t}\n\t\ti \u003d 0\n\t\tfor col in row:\n\t\t\tinstance[\"data\"][headers[i]] \u003d col\n\t\t\ti +\u003d1\n\t\tresult.append(instance)\t\n\t\n\treturn result",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "elementStyle": {
+            "margin": "10px"
+          },
+          "path": "ESPHome/SingleSensor",
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

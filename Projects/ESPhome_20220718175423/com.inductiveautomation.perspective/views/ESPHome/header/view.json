@@ -1,0 +1,152 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 52
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "40px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#FFFFFF",
+                "fontFamily": "Roboto",
+                "fontSize": "18px"
+              },
+              "text": "ESPHome/Ignition Integration - Rhys Morgan"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "newTab": true,
+                    "url": "https://github.com/rhysmorgan134"
+                  },
+                  "scope": "C",
+                  "type": "nav"
+                }
+              }
+            },
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "50px"
+            },
+            "props": {
+              "style": {
+                "color": "#FFFFFF",
+                "cursor": "pointer",
+                "fontWeight": "bold",
+                "textShadow": "#070000 3 2 1"
+              },
+              "text": "Github"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "522px"
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Icon"
+            },
+            "position": {
+              "basis": "50%"
+            },
+            "props": {
+              "color": "#FFFFFF",
+              "path": "material/history"
+            },
+            "type": "ia.display.icon"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "50%"
+            },
+            "props": {
+              "text": "Reset All Sensors",
+              "textStyle": {
+                "color": "#FFFFFF",
+                "fontSize": "14px",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tquery \u003d \"UPDATE Sensors SET blackListed\u003d0 WHERE idSensors !\u003d \u0027\u0027 AND blackListed \u003d True\"\n\tsystem.db.runUpdateQuery(query)\n\tsystem.tag.write(\"[ESPHome]ESPhome/config/pull\", True)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_1"
+        },
+        "position": {
+          "basis": "120px"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "cursor": "pointer"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "backgroundColor": "#007ED8"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "UOM": "%",
+      "added": 1,
+      "cla": "humidity",
+      "commandTopic": null,
+      "configPath": "[MQTT Engine]homeassistant/sensor/man-room/man-room_temperature/config",
+      "devId": "a4cf12df1653",
+      "idSensors": "ESPsensorgarage_humidity",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "garage",
+      "sensorName": "Garage Humidity",
+      "sw": "esphome v2021.11.4 Dec 28 2021, 12:51:12",
+      "topic": "garage/sensor/garage_humidity/state",
+      "type": "sensor"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 63,
+      "width": 266
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "ToggleSwitch"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "props": {
+          "enabled": false,
+          "label": {
+            "position": "left"
+          }
+        },
+        "type": "ia.input.toggle-switch"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

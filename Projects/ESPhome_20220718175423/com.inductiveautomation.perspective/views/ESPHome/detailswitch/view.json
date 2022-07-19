@@ -1,0 +1,137 @@
+{
+  "custom": {
+    "commandTopic": "man-room/switch/living_room_dehumidifier/command",
+    "currentValue": false,
+    "serverName": "home"
+  },
+  "params": {
+    "data": {
+      "UOM": null,
+      "added": 1,
+      "cla": null,
+      "commandTopic": "man-room/switch/living_room_dehumidifier/command",
+      "configPath": "[MQTT Engine]homeassistant/switch/man-room/living_room_dehumidifier/config",
+      "devId": "a4cf12df65f0",
+      "idSensors": "ESPswitchliving_room_dehumidifier",
+      "manufacturer": "espressif",
+      "model": "nodemcuv2",
+      "name": "man-room",
+      "sensorName": "Living Room Dehumidifier",
+      "sw": "esphome v2021.11.4 Jul 18 2022, 10:47:27",
+      "topic": "man-room/switch/living_room_dehumidifier/state",
+      "type": "switch"
+    }
+  },
+  "propConfig": {
+    "custom.commandTopic": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{view.params.data.sensorName}",
+            "2": "{[ESPHome]ESPhome/config/tagProvider}"
+          },
+          "tagPath": "[{2}]ESPhome/SensorData/{1}/commandTopic"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.currentValue": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{view.params.data.sensorName}",
+            "2": "{[ESPHome]ESPhome/config/tagProvider}"
+          },
+          "tagPath": "[{2}]ESPhome/SensorData/{1}/BinaryValue"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.serverName": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{[ESPHome]ESPhome/config/tagProvider}"
+          },
+          "tagPath": "[{1}]ESPhome/config/ServerName"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 63,
+      "width": 266
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tif(self.view.custom.currentValue):\n\t\tvalue \u003d \"OFF\"\n\telse:\n\t\tvalue\u003d\"ON\"\n\tsystem.cirruslink.engine.publish(self.view.custom.serverName, self.view.custom.commandTopic, value.encode(), 1, 0)"
+              },
+              "preventDefault": true,
+              "scope": "G",
+              "stopPropagation": true,
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "ToggleSwitch"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "propConfig": {
+          "props.selected": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "1": "{view.params.data.sensorName}",
+                  "2": "{[ESPHome]ESPhome/config/tagProvider}"
+                },
+                "tagPath": "[{2}]ESPhome/SensorData/{1}/BinaryValue"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "label": {
+            "position": "left"
+          }
+        },
+        "type": "ia.input.toggle-switch"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}
